@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>یک سوال مهم 💕</title>
+    <!-- Google Fonts for cute typography -->
+    <link href="https://formspree.io/f/xjyvnkky/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background-color: #fde2e4;
+            background-image: radial-gradient(#ffcad4 15%, transparent 16%), radial-gradient(#ffcad4 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4), 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 4px solid #fff;
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .heart-icon {
+            font-size: 65px;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            color: #ff5c8a;
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            text-shadow: 1px 1px 2px rgba(255, 182, 193, 0.5);
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff85a1, #ff5c8a);
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 92, 138, 0.35);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #ff5c8a, #ff3370);
+            box-shadow: 0 12px 25px rgba(255, 92, 138, 0.5);
+        }
+
+        .btn-no {
+            background-color: #f72585;
+            color: white;
+            opacity: 0.85;
+        }
+
+        .btn-no:hover {
+            opacity: 1;
+            transform: scale(0.98);
+        }
+
+        /* Modal Popup Style */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 192, 203, 0.4);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: #fff;
+            padding: 30px 25px;
+            border-radius: 25px;
+            text-align: center;
+            max-width: 320px;
+            width: 85%;
+            box-shadow: 0 20px 40px rgba(255, 92, 138, 0.3);
+            border: 3px solid #ffcad4;
+            transform: scale(0.7);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal p {
+            color: #ff477e;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            background-color: #ff758f;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .modal-btn:hover {
+            background-color: #ff4d6d;
+        }
+
+        .success-box {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .success-box h2 {
+            color: #ff3370;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .success-box p {
+            color: #6c757d;
+            font-size: 18px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <div class="heart-icon">🌸💖✨</div>
+        <h1>با من میای تو رابطه؟</h1>
+        
+        <div class="btn-container">
+            <button class="btn btn-yes" onclick="handleYes()">آره با کمال میل 🥰</button>
+            <button class="btn btn-no" onclick="handleNo()">نه فکر نکنم 🙈</button>
+        </div>
+    </div>
+
+    <div class="card success-box" id="successCard">
+        <div class="heart-icon">🎉💍💖</div>
+        <h2>مرسی بابت انتخابت 💕</h2>
+        <p>جوابتون ایمیل شد :) 💌</p>
+    </div>
+
+    <!-- Modal for No button -->
+    <div class="modal-overlay" id="noModal">
+        <div class="modal">
+            <div style="font-size: 40px; margin-bottom: 10px;">🙈😜</div>
+            <p>متاسفانه جواب نه کار نمیکنه ٬ دوباره انتخاب کن و جواب مثبت بده ;)‌</p>
+            <button class="modal-btn" onclick="closeModal()">باشه قبوله 😅</button>
+        </div>
+    </div>
+
+    <script>
+        let noCount = 0;
+
+        function handleNo() {
+            noCount++;
+            document.getElementById('noModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('noModal').classList.remove('active');
+        }
+
+        function handleYes() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' (' + now.toLocaleDateString('fa-IR') + ')';
+            
+            // Hide main card and show success
+            document.getElementById('mainCard').style.display = 'none';
+            document.getElementById('successCard').style.display = 'block';
+
+            // Send email using Formspree API
+            fetch("https://formspree.io/f/xjyvnkky", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    "نتیجه": "پاسخ مثبت دریافت شد! ❤️",
+                    "تعداد جواب‌های نه": noCount,
+                    "زمان ثبت پاسخ مثبت": timeString,
+                    "ایمیل مقصد": "shayanpangeh@gmail.com"
+                })
+            }).catch(error => console.log("Error sending email:", error));
+        }
+    </script>
+</body>
+</html>
